@@ -1,4 +1,4 @@
-<!-- eslint-disable vue/no-v-model-argument -->
+<!-- eslint-disable max-len -->
 <template>
   <main class="content container">
     <div class="content__top content__top--catalog">
@@ -14,8 +14,8 @@
       <ProductFilter v-model:price-from="filterPriceFrom" v-model:price-to="filterPriceTo"
         v-model:category-id="filterCategoryId" v-model:color="filterColor" />
       <section class="catalog">
-        <ProductList :products="products"/>
-        <BasePagination v-model:page="page" :count="countProducts" :per-page="productsPerPage" />
+        <ProductList :products="products" />
+        <BasePagination v-model:page="page" :count="countProducts" :per-page="productsPerPage"/>
       </section>
     </div>
   </main>

@@ -101,7 +101,7 @@
         </ul>
       </fieldset>
 
-      <button class="filter__submit button button--primery" type="submit">
+      <button class="filter__submit button button--primery" type="submit" @click.prevent="submit">
         Применить
       </button>
       <button class="filter__reset button button--second" type="button" @click.prevent="reset">
