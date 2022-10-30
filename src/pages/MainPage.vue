@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-v-model-argument -->
 <!-- eslint-disable max-len -->
 <template>
   <main class="content container">
