@@ -15,11 +15,10 @@
     </span>
 
     <ul class="colors colors--black">
-      <li class="colors__item" v-for="(col, index) in product.colors.length" :key="col.id"
-        :style="{ backgroundColor: product.colors[index] }">
+      <li class="colors__item" v-for="(col, index) in product.colors.length" :key="col.id">
         <label class="colors__label" for="name">
           <input class="colors__radio sr-only" type="radio">
-          <span class="colors__value">
+          <span class="colors__value" :style="{ 'backgroundColor': `${product.colors[index]}`}">
           </span>
         </label>
       </li>

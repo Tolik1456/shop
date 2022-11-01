@@ -37,11 +37,11 @@
         <legend class="form__legend">Цвет</legend>
         <ul class="colors">
           <li class="colors__item" v-for="(col,index) in colors"
-          :key="index" :style="{backgroundColor: colors[index]}">
+          :key="index">
             <label class="colors__label" for="name">
               <input class="colors__radio sr-only" type="radio"
               v-model="currentColor">
-              <span class="colors__value">
+              <span class="colors__value" :style="{ 'backgroundColor': `${colors[index]}`}">
               </span></label>
           </li>
         </ul>
