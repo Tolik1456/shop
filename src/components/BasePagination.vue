@@ -42,7 +42,7 @@ export default {
   },
   methods: {
     paginate(page) {
-      this.$emit('paginate', page);
+      this.$emit('update:page', page);
     },
   },
 };

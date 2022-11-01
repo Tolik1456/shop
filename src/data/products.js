@@ -6,7 +6,7 @@ export default [
     title: 'Airpods',
     price: 15990,
     image: '/img/airpods.jpg',
-    colors: ['#FF6B00', '#FFF', '#000'],
+    colors: ['#FF6B00', '#000'],
   },
   {
     id: 2,
@@ -46,7 +46,7 @@ export default [
     title: 'Wheels',
     price: 9990,
     image: '/img/wheels.jpg',
-    colors: ['#FFF', '#73B6EA'],
+    colors: ['#73B6EA'],
   },
   {
     id: 7,
@@ -70,6 +70,6 @@ export default [
     title: 'Phone',
     price: 19990,
     image: '/img/phone.jpg',
-    colors: ['#FFBE15', '#939393', '#8BE000', '#FF6B00', '#FFF', '#000'],
+    colors: ['#FFBE15', '#939393', '#8BE000', '#FF6B00', '#000'],
   },
 ];

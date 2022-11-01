@@ -1,3 +1,9 @@
+<!-- eslint-disable linebreak-style -->
+<!-- eslint-disable linebreak-style -->
+<!-- eslint-disable linebreak-style -->
+<!-- eslint-disable linebreak-style -->
+<!-- eslint-disable linebreak-style -->
+<!-- eslint-disable linebreak-style -->
 <template>
   <aside class="filter">
     <h2 class="filter__title">Фильтры</h2>
@@ -34,7 +40,7 @@
           :key="index" :style="{backgroundColor: colors[index]}">
             <label class="colors__label" for="name">
               <input class="colors__radio sr-only" type="radio"
-              v-model="currentColor" :value="colors[index]">
+              v-model="currentColor">
               <span class="colors__value">
               </span></label>
           </li>
