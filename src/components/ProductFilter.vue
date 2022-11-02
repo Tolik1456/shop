@@ -1,3 +1,4 @@
+<!-- eslint-disable vuejs-accessibility/label-has-for -->
 <!-- eslint-disable linebreak-style -->
 <!-- eslint-disable linebreak-style -->
 <!-- eslint-disable linebreak-style -->
@@ -38,9 +39,9 @@
         <ul class="colors">
           <li class="colors__item" v-for="(col,index) in colors"
           :key="index">
-            <label class="colors__label" for="name">
+            <label class="colors__label">
               <input class="colors__radio sr-only" type="radio"
-              v-model="currentColor">
+              v-model="currentColor" :value="colors[index]">
               <span class="colors__value" :style="{ 'backgroundColor': `${colors[index]}`}">
               </span></label>
           </li>
