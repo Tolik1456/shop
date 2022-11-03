@@ -42,11 +42,10 @@
             <fieldset class="form__block">
               <legend class="form__legend">Цвет:</legend>
               <ul class="colors">
-                <li class="colors__item" v-for="(col, index) in product.colors.length" :key="col.id"
-                  :style="{ backgroundColor: product.colors[index] }">
+                <li class="colors__item" v-for="(col, index) in product.colors.length" :key="col.id">
                   <label class="colors__label" for="name">
                     <input class="colors__radio sr-only" type="radio">
-                    <span class="colors__value">
+                    <span class="colors__value" :style="{ 'backgroundColor': `${product.colors[index]}` }">
                     </span>
                   </label>
                 </li>
@@ -91,7 +90,7 @@
                     <use xlink:href="#icon-minus"></use>
                   </svg>
                 </button>
-
+                <button type="button" aria-label="Количество товаров">1</button>
                 <button type="button" aria-label="Добавить один товар">
                   <svg width="12" height="12" fill="currentColor">
                     <use xlink:href="#icon-plus"></use>
