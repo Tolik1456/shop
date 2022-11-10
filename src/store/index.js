@@ -9,12 +9,4 @@ export default new Vuex.Store({
       { productId: 1, amount: 2 },
     ],
   },
-  getters: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
-  modules: {
-  },
 });
