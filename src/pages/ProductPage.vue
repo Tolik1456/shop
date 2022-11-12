@@ -1,15 +1,16 @@
+<!-- eslint-disable vuejs-accessibility/form-control-has-label -->
 <!-- eslint-disable max-len -->
 <template>
   <main class="content container">
     <div class="content__top">
       <ul class="breadcrumbs">
         <li class="breadcrumbs__item">
-          <router-link class="breadcrumbs__link" :to="{name: 'main'}">
+          <router-link class="breadcrumbs__link" :to="{ name: 'main' }">
             Каталог
           </router-link>
         </li>
         <li class="breadcrumbs__item">
-          <router-link class="breadcrumbs__link" :to="{name: 'main'}">
+          <router-link class="breadcrumbs__link" :to="{ name: 'main' }">
             {{ category.title }}
           </router-link>
         </li>
@@ -34,7 +35,7 @@
           {{ product.title }}
         </h2>
         <div class="item__form">
-          <form class="form" action="#" method="POST">
+          <form class="form" action="#" method="POST" @submit.prevent="addToCart">
             <b class="item__price">
               {{ product.price | numberFormat }} Р
             </b>
@@ -85,13 +86,15 @@
 
             <div class="item__row">
               <div class="form__counter">
-                <button type="button" aria-label="Убрать один товар">
+                <button class="button" @click="productAmount--" :disabled="productAmount<2" type="button" aria-label="Убрать один товар">
                   <svg width="12" height="12" fill="currentColor">
                     <use xlink:href="#icon-minus"></use>
                   </svg>
                 </button>
-                <button type="button" aria-label="Количество товаров">1</button>
-                <button type="button" aria-label="Добавить один товар">
+
+                <input type="text" v-model.number="productAmount">
+
+                <button class="button" @click="productAmount++" type="button" aria-label="Добавить один товар">
                   <svg width="12" height="12" fill="currentColor">
                     <use xlink:href="#icon-plus"></use>
                   </svg>
@@ -164,6 +167,11 @@ import categories from '@/data/categories';
 import numberFormat from '@/helpers/numberFormat';
 
 export default {
+  data() {
+    return {
+      productAmount: 1,
+    };
+  },
   filters: {
     numberFormat,
   },
@@ -173,6 +181,14 @@ export default {
     },
     category() {
       return categories.find((category) => category.id === this.product.categoryID);
+    },
+  },
+  methods: {
+    addToCart() {
+      this.$store.commit(
+        'addProductToCart',
+        { productId: this.product.id, amount: this.productAmount },
+      );
     },
   },
 };
