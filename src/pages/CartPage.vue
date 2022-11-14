@@ -67,7 +67,7 @@
         <ul class="breadcrumbs">
           <li class="breadcrumbs__item">
             <a class="breadcrumbs__link" href="index.html">
-              Каталог
+              <router-link class="breadcrumbs__link" :to="{ name: 'main' }">Каталог</router-link>
             </a>
           </li>
           <li class="breadcrumbs__item">

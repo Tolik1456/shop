@@ -25,6 +25,8 @@ import products from '@/data/products';
 import ProductList from '@/components/ProductList.vue';
 import BasePagination from '@/components/BasePagination.vue';
 import ProductFilter from '@/components/ProductFilter.vue';
+import axios from 'axios';
+import { response } from 'express';
 
 export default {
   components: { ProductList, BasePagination, ProductFilter },
@@ -36,6 +38,7 @@ export default {
       filterColor: '',
       page: 1,
       productsPerPage: 3,
+      productsData: null,
     };
   },
   computed: {
@@ -71,5 +74,14 @@ export default {
       return this.filteredProducts.length;
     },
   },
+  methods: {
+    loadProducts() {
+      axios.get('http://vue-study.dev.creonit.ru/api/products')
+      .then(response => this.productsData = response.data);
+  },
+  created() {
+    this.loadProducts();
+  },
+},
 };
 </script>
