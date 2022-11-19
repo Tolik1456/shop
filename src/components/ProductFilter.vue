@@ -25,11 +25,9 @@
       <fieldset class="form__block">
         <legend class="form__legend">Категория</legend>
         <label class="form__label form__label--select" for="name">
-          <select class="form__select" type="text" name="category"
-          v-model.number="currentCategoryId">
+          <select class="form__select" type="text" name="category" v-model.number="currentCategoryId">
             <option value="0">Все категории</option>
-            <option :value="category.id" v-for="category in categories"
-            :key="category.id">{{ category.title }}</option>
+            <option :value="category.id" v-for="category in categories" :key="category.id">{{ category.title }}</option>
           </select>
         </label>
       </fieldset>
@@ -37,12 +35,10 @@
       <fieldset class="form__block">
         <legend class="form__legend">Цвет</legend>
         <ul class="colors">
-          <li class="colors__item" v-for="(col,index) in colors"
-          :key="index">
+          <li class="colors__item" v-for="(col, index) in colors" :key="index">
             <label class="colors__label">
-              <input class="colors__radio sr-only" type="radio"
-              v-model="currentColor" :value="colors[index]">
-              <span class="colors__value" :style="{ 'backgroundColor': `${colors[index]}`}">
+              <input class="colors__radio sr-only" type="radio" v-model="currentColor" :value="colors[index]">
+              <span class="colors__value" :style="{ 'backgroundColor': `${colors[index]}` }">
               </span></label>
           </li>
         </ul>
@@ -119,7 +115,8 @@
 </template>
 
 <script>
-import categories from '../data/categories';
+import axios from 'axios';
+import { API_BASE_URL } from '@/config';
 
 export default {
   data() {
@@ -129,13 +126,14 @@ export default {
       currentCategoryId: 0,
       currentColor: '',
       colors: ['#73B6EA', '#FFBE15', '#939393', '#8BE000', '#FF6B00', '#FFF', '#000'],
+      categoriesData: null,
     };
   },
 
   props: ['priceFrom', 'priceTo', 'categoryId', 'color'],
   computed: {
     categories() {
-      return categories;
+      return this.categoriesData ? this.categoriesData.items : [];
     },
   },
   watch: {
@@ -165,6 +163,13 @@ export default {
       this.$emit('update:categoryId', 0);
       this.$emit('update:color', '');
     },
+    loadCategorirs() {
+      axios.get(API_BASE_URL + '/api/productCategories')
+        .then(response => this.categoriesData = response.data)
+    },
   },
+  created() {
+    this.loadCategorirs();
+  }
 };
 </script>
