@@ -1,7 +1,7 @@
 <!-- eslint-disable vuejs-accessibility/form-control-has-label -->
 <!-- eslint-disable max-len -->
 <template>
-  <main class="content container" v-if="productLoading">Загрузка товара...</main>
+  <main class="loader" v-if="productLoading"></main>
   <main class="content container" v-else-if="!productData">Не удалось загрузить товар</main>
   <main class="content container" v-else>
     <div class="content__top">
@@ -48,7 +48,7 @@
                 <li class="colors__item" v-for="(col, index) in product.colors.length" :key="col.id">
                   <label class="colors__label" for="name">
                     <input class="colors__radio sr-only" type="radio">
-                    <span class="colors__value" :style="{ 'backgroundColor': `${product.colors[index]}` }">
+                    <span class="colors__value" :style="{ 'backgroundColor': `${product.colors[index].code}` }">
                     </span>
                   </label>
                 </li>
@@ -104,9 +104,11 @@
                 </button>
               </div>
 
-              <button class="button button--primery" type="submit">
+              <button class="button button--primery" type="submit" :disabled="productAddSending">
                 В корзину
               </button>
+              <div v-show="productAdded">Товар добавлен в корзину</div>
+              <div v-show="productAddSending">Добавляем товар в корзину...</div>
             </div>
           </form>
         </div>
@@ -168,6 +170,7 @@
 import numberFormat from '@/helpers/numberFormat';
 import axios from 'axios';
 import { API_BASE_URL } from '@/config';
+import { mapActions } from 'vuex';
 
 export default {
   data() {
@@ -176,6 +179,8 @@ export default {
       productData: null,
       productLoading: false,
       productLoadingFailed: false,
+      productAdded: false,
+      productAddSending: false,
     };
   },
   filters: {
@@ -190,11 +195,15 @@ export default {
     },
   },
   methods: {
+    ...mapActions(['addProductToCart']),
     addToCart() {
-      this.$store.commit(
-        'addProductToCart',
-        { productId: this.product.id, amount: this.productAmount },
-      );
+      this.productAdded = false;
+      this.productAddSending = true;
+      this.addProductToCart({productId: this.product.id, amount: this.productAmount})
+      .then(() => {
+        this.productAdded = true;
+      this.productAddSending = false;
+      })
     },
     loadProduct() {
       this.productLoading = true;

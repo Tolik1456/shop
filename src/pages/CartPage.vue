@@ -2,7 +2,9 @@
 <!-- eslint-disable max-len -->
 <template>
   <div>
-    <div style="display: none">
+    <main class="loader" v-if="cartLoading"></main>
+    <main v-else-if="!cartData">Не удалось загрузить товар</main>
+    <div v-else style="display: none">
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         <symbol id="icon-arrow-left" viewbox="0 0 8 14">
           <path d="M6 12H4v-2h2v2zm-2-2H2V8h2v2zM2 8H0V6h2v2zm2-2H2V4h2v2zm2-2H4V2h2v2zm2-2H6V0h2v2zm0 12H6v-2h2v2z">
@@ -89,7 +91,7 @@
         <form class="cart__form form" action="#" method="POST">
           <div class="cart__field">
             <ul class="cart__list">
-              <CartItem v-for="item in products" :key="item.productId" :item="item"/>
+              <CartItem v-for="item in products" :key="item.productId" :item="item" />
             </ul>
           </div>
 
@@ -116,6 +118,12 @@ import { mapGetters } from 'vuex';
 import CartItem from '@/components/CartItem.vue';
 
 export default {
+  data() {
+    return {
+    cartData: null,
+    cartLoading: false,
+    }
+  },
   filters: {
     numberFormat,
   },

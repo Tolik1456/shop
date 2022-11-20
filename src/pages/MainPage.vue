@@ -13,7 +13,7 @@
       <ProductFilter :price-from.sync="filterPriceFrom" :price-to.sync="filterPriceTo"
         :category-id.sync="filterCategoryId" :color.sync="filterColor" />
       <section class="catalog">
-        <div v-if="productsLoading">Загрузка товаров...</div>
+        <div class="loader" v-if="productsLoading"></div>
         <div v-if="productsLoadingFalled">Произошла ошибка при загрузке товаров <button @click.prevent="loadProducts()">Попробовать еще раз</button></div>
         <ProductList :products="products" />
         <BasePagination :page.sync="page" :count="countProducts" :per-page="productsPerPage" />
@@ -36,7 +36,7 @@ export default {
       filterPriceFrom: 0,
       filterPriceTo: 0,
       filterCategoryId: 0,
-      filterColor: '',
+      filterColor: 0,
       page: 1,
       productsPerPage: 3,
       productsData: null,
@@ -70,6 +70,7 @@ export default {
             page: this.page,
             limit: this.productsPerPage,
             categoryId: this.filterCategoryId,
+            colorId: this.filterColor,
             minPrice: this.filterPriceFrom,
             maxPrice: this.filterPriceTo,
           },
@@ -91,6 +92,9 @@ watch: {
     this.loadProducts();
   },
   filterCategoryId() {
+    this.loadProducts();
+  },
+  filterColor() {
     this.loadProducts();
   },
 },
