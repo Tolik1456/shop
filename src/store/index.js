@@ -99,7 +99,7 @@ export default new Vuex.Store({
     },
     deleteCartProduct(context, { productId }) {
       return axios.delete(API_BASE_URL + '/api/baskets/products', {
-        productId: productId,
+        data: { productId } ,
       }, {
         params: {
           userAccessKey: context.state.userAccessKey
