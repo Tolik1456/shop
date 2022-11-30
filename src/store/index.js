@@ -43,9 +43,6 @@ export default new Vuex.Store({
     },
   },
   getters: {
-    orderInfo(state) {
-      return state.orderInfo;
-    },
     cartDetailProducts(state) {
       return state.cartProducts.map(item => {
         const product = state.cartProductsData.find(p => p.product.id === item.productId).product;
